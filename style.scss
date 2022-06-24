@@ -1,0 +1,206 @@
+@font-face {
+    font-family: digital;
+    src: url(./font/digital-7.ttf);
+}
+
+@font-face {
+    font-family: digital;
+    src: url(./font/digital-7\ \(italic\).ttf);
+}
+
+@font-face {
+    font-family: digital;
+    src: url(./font/digital-7\ \(mono\ italic\).ttf);
+}
+
+@font-face {
+    font-family: digital;
+    src: url(./font/digital-7\ \(mono\).ttf);
+}
+
+
+.air-conditioner {
+    max-width: 750px;
+    height: 300px;
+    margin: 0 auto;
+    border-bottom: 50px solid #78B9EB;
+    border-radius: 50px;
+    position: relative;
+    background-color: #D1E7F8;
+    z-index: 100;
+}
+
+.wind-vane {
+    top: 100%;
+    left: 50%;
+    height: 40px;
+    width: 85%;
+    position: absolute;
+    border-radius: 5px;
+    /* background-color: red; */
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wind-vane-line-left,
+.wind-vane-line-right {
+    background-color: #4C9AE2;
+    height: 15px;
+    border-radius: 5rem;
+}
+
+.wind-vane-line-left {
+    width: 40%;
+}
+
+.wind-vane-line-right {
+    width: 50%;
+}
+
+.line-temperature {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 5px;
+    background-color: #3470B0;
+    border-radius: 5px;
+
+}
+
+.line-temperature:after {
+    content: ' ' attr(init)' ';
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+    background-color: #3470B0;
+    position: absolute;
+    top: -22px;
+    right: 0;
+    width: 100px;
+    height: 50px;
+    color: rgba(255, 255, 255, 0.054);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: digital;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+
+.display-temperature .line-temperature:after {
+    transition: all 1s linear;
+    color: rgba(255, 255, 255, 1) !important;
+}
+
+.wind-vane-line {
+    width: 100%;
+    height: 5px;
+    position: relative;
+    top: 55%;
+    border-radius: 5px;
+    background-color: #54a0ff;
+    transform: translateY(-50%)
+}
+
+.snow {
+    display: none;
+    position: absolute;
+    bottom: -100%;
+    width: 100%;
+    height: 550px;
+    transform: translateY(45%);
+    overflow: hidden;
+
+}
+
+.display-snow {
+    display: block;
+}
+
+
+//snow
+.snowflake {
+    --size: 1vw;
+    width: var(--size);
+    height: var(--size);
+    color: #A2DDFD;
+    font-size: 2rem;
+    border-radius: 50%;
+    position: absolute;
+    top: -5vh;
+}
+
+@keyframes snowfall {
+    0% {
+        transform: translate3d(var(--left-ini), 0, 0);
+    }
+
+    100% {
+        transform: translate3d(var(--left-end), 110vh, 0);
+    }
+}
+
+@for $i from 1 through 100 {
+    .snowflake:nth-child(#{$i}) {
+        --size: #{random(5) * 0.2}vw;
+        --left-ini: #{random(20) - 10}vw;
+        --left-end: #{random(20) - 10}vw;
+        left: #{random(100)}vw;
+        animation: snowfall #{2 + random(10)}s linear infinite;
+        animation-delay: -#{random(10)}s;
+    }
+}
+
+/* added small blur every 6 snowflakes*/
+.snowflake:nth-child(6n) {
+    filter: blur(1px);
+}
+
+.remote {
+    width: 320px;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* From uiverse.io by @Voxybuns */
+button {
+    /* Variables */
+    --button_radius: 0.75em;
+    --button_color: #e8e8e8;
+    --button_outline_color: #333;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--button_radius);
+    background: var(--button_outline_color);
+}
+
+.button_top {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 0.75em 1.5em;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+}
+
+button:hover .button_top {
+    /* Pull the button upwards when hovered */
+    transform: translateY(-0.33em);
+}
+
+button:active .button_top {
+    /* Push the button downwards when pressed */
+    transform: translateY(0);
+}
